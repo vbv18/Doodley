@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  email              String              @unique
+  password           String
+  avatar_url         String?
+  globalRole         GlobalRole          @default(USER)
+  memberships        RoomMember[]
+  chats              Chat[]
+  sessions           Session[]
+  ownedRooms         Room[]              @relation("RoomOwner")
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  whiteboardVersions WhiteboardVersion[]
+}
+
+model Session {
+  id               Int      @id @default(autoincrement())
+  userId           Int
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refreshTokenHash String   @unique
+  ip               String
+  userAgent        String
+  revoked          Boolean  @default(false)
+  expiresAt        DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([userId, refreshTokenHash])
+}
+
+model Room {
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  roomCode           String              @unique
+  ownerId            Int
+  owner              User                @relation("RoomOwner", fields: [ownerId], references: [id])
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  members            RoomMember[]
+  chats              Chat[]
+  aimessages         AIMessage[]
+  whiteboardVersions WhiteboardVersion[]
+  invitations        Invitation[]
+}
+
+model RoomMember {
+  userId   Int
+  roomId   Int
+  role     RoomRole
+  user     User     @relation(fields: [userId], references: [id])
+  room     Room     @relation(fields: [roomId], references: [id])
+  joinedAt DateTime @default(now())
+
+  @@id([userId, roomId])
+}
+
+model Chat {
+  id        Int      @id @default(autoincrement())
+  roomId    Int
+  message   String
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  room      Room     @relation(fields: [roomId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, roomId])
+}
+
+model AIMessage {
+  id        Int      @id @default(autoincrement())
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  prompt    String
+  response  Json
+  provider  String
+  cost      Float    @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([roomId])
+}
+
+model WhiteboardVersion {
+  id          Int      @id @default(autoincrement())
+  roomId      Int
+  room        Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  createdById Int
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  snapshot    Json
+  createdAt   DateTime @default(now())
+
+  @@index([roomId, createdAt])
+}
+
+model Invitation {
+  id        Int      @id @default(autoincrement())
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([roomId])
+}
+
+enum RoomRole {
+  OWNER
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum GlobalRole {
+  SUPER_ADMIN
+  ADMIN
+  USER
+  GUEST
+}
