@@ -20,6 +20,12 @@ importers:
 
   apps/http-server:
     dependencies:
+      '@repo/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -45,12 +51,6 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
-      '@repo/config':
-        specifier: workspace:*
-        version: link:../../packages/config
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../../packages/db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -130,16 +130,16 @@ importers:
 
   apps/ws-server:
     dependencies:
-      ws:
-        specifier: ^8.21.0
-        version: 8.21.0
-    devDependencies:
       '@repo/config':
         specifier: workspace:*
         version: link:../../packages/config
       '@repo/db':
         specifier: workspace:*
         version: link:../../packages/db
+      ws:
+        specifier: ^8.21.0
+        version: 8.21.0
+    devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
