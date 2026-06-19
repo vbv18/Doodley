@@ -1,2 +1,2 @@
-export * from "./prisma";
-export * from "./redis";
+export * from "./prisma.js";
+export * from "./redis.js";
