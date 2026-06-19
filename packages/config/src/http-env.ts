@@ -17,8 +17,6 @@ const ENVSchema = z.object({
     REFRESH_TOKEN_TTL: z.string().regex(/^\d+[d]$/),
 
     MAX_SESSIONS_PER_USER: z.coerce.number().default(4)
-
-
 })
 
 const parsed = ENVSchema.safeParse(process.env);
