@@ -1,4 +1,6 @@
-import type { GlobalRole, RoomRole } from "@repo/types";
+
+
+import { GlobalRole } from "@repo/types";
 
 
 export type JWTPayload = {
@@ -6,10 +8,9 @@ export type JWTPayload = {
     email: string
 }
 
-export type requireGlobalRoleType = {
-    roles: GlobalRole[]
-}
-
-export type requireRoomRoleType = {
-    roles: RoomRole[]
+export type AuthUser = {
+    id: number;
+    name: string;
+    email: string;
+    globalRole: GlobalRole;
 }

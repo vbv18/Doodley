@@ -1,15 +1,16 @@
 
+import type { RoomMember } from "@repo/db";
+import { GlobalRole, RoomRole } from "@repo/types";
+import { AuthUser } from "./auth.ts";
+
 
 declare global {
     namespace Express {
-        interface User {
-            id: number;
-            email: string;
-            globalRole: GlobalRole;
-        }
-
         interface Request {
-            user?: User;
+            user?: AuthUser;
+            membership?: RoomMember
         }
     }
 }
+
+export { }
