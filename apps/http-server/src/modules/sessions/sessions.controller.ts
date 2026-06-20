@@ -62,6 +62,7 @@ export async function refreshToken(req: Request, res: Response) {
     setRefreshCookie(res, newRefreshToken);
 
     return res.status(200).json({
+        success: true,
         message: "Access Token refreshed successfully",
         accessToken: newAccessToken
     })
@@ -95,6 +96,7 @@ export async function active(req: Request, res: Response) {
     });
 
     return res.status(200).json({
+        success: true,
         message: `${activeSessions.length} sessions are active.`,
         sessions: activeSessions.map(({ userAgent, updatedAt }) => ({ userAgent, updatedAt }))
     });
@@ -133,6 +135,7 @@ export async function deleteCurrent(req: Request, res: Response) {
     clearRefreshCookie(res);
 
     return res.status(200).json({
+        success: true,
         message: "Logged out successfully."
     });
 }
@@ -171,6 +174,7 @@ export async function deleteById(req: Request, res: Response) {
     });
 
     return res.status(200).json({
+        success: true,
         message: "Session revoked successfully."
     });
 }
@@ -198,6 +202,7 @@ export async function deleteAll(req: Request, res: Response) {
     clearRefreshCookie(res);
 
     return res.status(200).json({
+        success: true,
         message: "Logged out from all devices."
     });
 } 

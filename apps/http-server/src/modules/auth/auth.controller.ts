@@ -63,6 +63,7 @@ export async function register(req: Request, res: Response) {
     setRefreshCookie(res, refreshToken);
 
     return res.status(201).json({
+        success: true,
         message: "User registered successfully.",
         accessToken
     });
@@ -115,6 +116,7 @@ export async function login(req: Request, res: Response) {
     setRefreshCookie(res, refreshToken);
 
     return res.status(200).json({
+        success: true,
         message: "User logged in successfully.",
         accessToken
     });
