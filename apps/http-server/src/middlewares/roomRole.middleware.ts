@@ -4,9 +4,10 @@ import AppError from "../utils/AppError.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { RoomRole } from "@repo/types";
 import { prisma } from "@repo/db";
+import { RoomPermission, RoomPermissions } from "../modules/rooms/permissions.js";
 
 
-export function requireRoomRole(roles: RoomRole[]) {
+export function requirePermission(permission: RoomPermission) {
 
     return asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
@@ -15,6 +16,7 @@ export function requireRoomRole(roles: RoomRole[]) {
         }
 
         const roomId: number = Number(req.params.roomId);
+        const allowedRoles: readonly RoomRole[] = RoomPermissions[permission];
 
         if (Number.isNaN(roomId)) {
             throw new AppError(400, "Invalid room id");
@@ -33,7 +35,7 @@ export function requireRoomRole(roles: RoomRole[]) {
             throw new AppError(403, "Not a room member");
         }
 
-        if (!roles.includes(membership.role)) {
+        if (!allowedRoles.includes(membership.role)) {
             throw new AppError(403, "Forbidden");
         }
 
