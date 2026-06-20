@@ -1,0 +1,12 @@
+
+
+export const RoomPermissions = {
+    EDIT_WHITEBOARD: ["OWNER", "ADMIN", "EDITOR"],
+    INVITE_MEMBERS: ["OWNER", "ADMIN", "EDITOR"],
+    ACCEPT_NEW_MEMBERS: ["OWNER", "ADMIN"],
+    REMOVE_MEMBERS: ["OWNER", "ADMIN"],
+    MANAGE_SETTINGS: ["OWNER", "ADMIN"],
+    DELETE_ROOM: ["OWNER"],
+    VIEW_ROOM: ["OWNER", "ADMIN", "EDITOR", "VIEWER"],
+    USE_AI: ["OWNER", "ADMIN", "EDITOR"]
+}
