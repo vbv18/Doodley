@@ -25,6 +25,7 @@ model User {
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   whiteboardVersions WhiteboardVersion[]
+  aiusageQuotas      AIUsageQuota[]
 }
 
 model Session {
@@ -131,4 +132,15 @@ enum GlobalRole {
   ADMIN
   USER
   GUEST
+}
+
+model AIUsageQuota {
+  id        Int    @id @default(autoincrement())
+  userId    Int
+  user      User   @relation(fields: [userId], references: [id])
+  month     String
+  tokenUsed Int    @default(0)
+  cost      Float  @default(0)
+
+  @@unique([userId, month])
 }
