@@ -7,6 +7,7 @@ import { httpEnv } from "@repo/config/http-env";
 import authRouter from "./modules/auth/auth.routes.js";
 import sessionRouter from "./modules/sessions/sessions.routes.js";
 import userRouter from "./modules/users/user.routes.js";
+import roomRouter from "./modules/rooms/room.routes.js";
 import healthRouter from "./modules/health/health.routes.js";
 import { notFoundHandler } from "./middlewares/notFound.middleware.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/sessions", sessionRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/rooms", roomRouter);
 app.use("/api/v1/health", healthRouter);
 
 
