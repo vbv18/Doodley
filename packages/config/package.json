@@ -18,8 +18,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -b",
-    "dev": "tsc -b --watch"
+    "build": "tsc -b"
   },
   "keywords": [],
   "author": "",
