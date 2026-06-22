@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+
 export const registerSchema = z.object({
     name: z.string().trim().min(3),
     email: z.email().trim().transform(val => val.toLowerCase()),

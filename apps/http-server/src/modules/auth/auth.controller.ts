@@ -5,8 +5,8 @@ import { prisma } from "@repo/db";
 import { enforceSessionCap, hashPassword, verifyPassword } from "./auth.utils.js";
 import { hashToken, REFRESH_TOKEN_TTL_MS, signAccessToken, signRefreshToken } from "../../utils/token.js";
 import { setRefreshCookie } from "../../utils/cookies.js";
-import type { JWTPayload } from "../../types/auth.js";
 import { loginSchema, registerSchema } from "./auth.validation.js";
+import type { JWTPayload } from "./auth.types.js";
 
 
 export async function register(req: Request, res: Response) {
