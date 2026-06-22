@@ -18,7 +18,7 @@ export function requirePermission(permission: RoomPermission) {
         const roomId: number = Number(req.params.roomId);
         const allowedRoles: readonly RoomRole[] = RoomPermissions[permission];
 
-        if (Number.isNaN(roomId)) {
+        if (!Number.isInteger(roomId)) {
             throw new AppError(400, "Invalid room id");
         }
 
