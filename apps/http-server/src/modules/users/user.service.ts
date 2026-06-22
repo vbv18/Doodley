@@ -1,7 +1,7 @@
 import AppError from "../../utils/AppError.js";
 import { prisma } from "@repo/db";
-import type { UpdateProfileRequestType } from "./user.validation.js";
 import { hashPassword } from "../auth/auth.utils.js";
+import type { UpdateProfileRequestType } from "./user.validation.js";
 
 
 export async function getProfile(userId: number) {

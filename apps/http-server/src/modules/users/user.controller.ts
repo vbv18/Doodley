@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
 
 import AppError from "../../utils/AppError.js";
-import * as userService from "./user.service.js";
 import { UpdateProfileRequestSchema } from "./user.validation.js";
+import * as userService from "./user.service.js";
 
 
 export async function getProfile(req: Request, res: Response) {
