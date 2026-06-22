@@ -4,8 +4,6 @@ import { z } from "zod";
 
 const ENVSchema = z.object({
     WS_PORT: z.coerce.number(),
-
-    REDIS_URL: z.string().optional(),
 });
 
 const parsed = ENVSchema.safeParse(process.env);
