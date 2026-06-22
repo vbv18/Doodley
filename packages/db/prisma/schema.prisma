@@ -26,6 +26,7 @@ model User {
   updatedAt          DateTime            @updatedAt
   whiteboardVersions WhiteboardVersion[]
   aiusageQuotas      AIUsageQuota[]
+  invitations        Invitation[]
 }
 
 model Session {
@@ -56,6 +57,8 @@ model Room {
   aimessages         AIMessage[]
   whiteboardVersions WhiteboardVersion[]
   invitations        Invitation[]
+
+  @@unique([ownerId, name])
 }
 
 model RoomMember {
@@ -67,6 +70,7 @@ model RoomMember {
   joinedAt DateTime @default(now())
 
   @@id([userId, roomId])
+  @@index([roomId])
 }
 
 model Chat {
@@ -108,14 +112,15 @@ model WhiteboardVersion {
 }
 
 model Invitation {
-  id        Int      @id @default(autoincrement())
-  roomId    Int
-  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  email     String
-  token     String   @unique
-  expiresAt DateTime
-  used      Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  roomId      Int
+  room        Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  invitedById Int
+  invitedBy   User     @relation(fields: [invitedById], references: [id])
+  token       String   @unique
+  expiresAt   DateTime
+  used        Boolean  @default(false)
+  createdAt   DateTime @default(now())
 
   @@index([roomId])
 }
