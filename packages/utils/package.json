@@ -1,0 +1,30 @@
+{
+  "name": "@repo/utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@repo/config": "workspace:*",
+    "@repo/types": "workspace:*",
+    "@types/node": "^26.0.0",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.10"
+  }
+}
