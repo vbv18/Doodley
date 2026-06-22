@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 
 import AppError from "../../utils/AppError.js";
 import { hashToken, REFRESH_TOKEN_TTL_MS, signAccessToken, signRefreshToken, verifyRefreshToken } from "../../utils/token.js";
-import type { JWTPayload } from "../auth/auth.types.js";
+import type { JWTPayload } from "@repo/types";
 import { prisma } from "@repo/db";
 import { clearRefreshCookie, setRefreshCookie } from "../../utils/cookies.js";
 

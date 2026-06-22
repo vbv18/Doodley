@@ -6,7 +6,7 @@ import { enforceSessionCap, hashPassword, verifyPassword } from "./auth.utils.js
 import { hashToken, REFRESH_TOKEN_TTL_MS, signAccessToken, signRefreshToken } from "../../utils/token.js";
 import { setRefreshCookie } from "../../utils/cookies.js";
 import { loginSchema, registerSchema } from "./auth.validation.js";
-import type { JWTPayload } from "./auth.types.js";
+import type { JWTPayload } from "@repo/types";
 
 
 export async function register(req: Request, res: Response) {

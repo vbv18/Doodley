@@ -3,7 +3,7 @@ import crypto from "crypto";
 import ms, { type StringValue } from "ms";
 
 import { httpEnv } from "@repo/config/http-env";
-import type { JWTPayload } from "../modules/auth/auth.types.js";
+import type { JWTPayload } from "@repo/types";
 
 
 export const REFRESH_TOKEN_TTL_MS = ms(httpEnv.REFRESH_TOKEN_TTL as StringValue);
@@ -32,13 +32,6 @@ export function verifyRefreshToken(refreshToken: string): JWTPayload {
     return jwt.verify(
         refreshToken,
         httpEnv.REFRESH_TOKEN_SECRET
-    ) as JWTPayload;
-}
-
-export function verifyAccessToken(accessToken: string): JWTPayload {
-    return jwt.verify(
-        accessToken,
-        httpEnv.ACCESS_TOKEN_SECRET
     ) as JWTPayload;
 }
 

@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction } from "express";
 import AppError from "../utils/AppError.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { prisma } from "@repo/db";
-import { verifyAccessToken } from "../utils/token.js";
+import { verifyAccessToken } from "@repo/utils";
 
 
 export const authenticate = asyncHandler(
