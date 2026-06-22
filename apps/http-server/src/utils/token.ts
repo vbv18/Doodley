@@ -3,7 +3,7 @@ import crypto from "crypto";
 import ms, { type StringValue } from "ms";
 
 import { httpEnv } from "@repo/config/http-env";
-import { JWTPayload } from "../modules/auth/auth.types.js";
+import type { JWTPayload } from "../modules/auth/auth.types.js";
 
 
 export const REFRESH_TOKEN_TTL_MS = ms(httpEnv.REFRESH_TOKEN_TTL as StringValue);
