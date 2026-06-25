@@ -42,8 +42,11 @@ export async function register(req: Request, res: Response) {
         }
     });
 
+    const userId: number = user.id;
+
+
     const payload: JWTPayload = {
-        id: user.id,
+        id: userId,
         email
     };
 
@@ -52,7 +55,7 @@ export async function register(req: Request, res: Response) {
 
     await prisma.session.create({
         data: {
-            userId: user.id,
+            userId: userId,
             refreshTokenHash: hashToken(refreshToken),
             ip: req.ip ?? "unknown",
             userAgent: req.headers["user-agent"] ?? "unknown",
@@ -65,7 +68,12 @@ export async function register(req: Request, res: Response) {
     return res.status(201).json({
         success: true,
         message: "User registered successfully.",
-        accessToken
+        accessToken,
+        user: {
+            id: userId,
+            name,
+            email
+        }
     });
 }
 
@@ -85,6 +93,7 @@ export async function login(req: Request, res: Response) {
         },
         select: {
             id: true,
+            name: true,
             password: true
         }
     });
@@ -93,19 +102,22 @@ export async function login(req: Request, res: Response) {
         throw new AppError(401, "Invalid Credentials!");
     }
 
+    const userId: number = user.id;
+    const userName: string = user.name;
+
     const payload: JWTPayload = {
-        id: user.id,
+        id: userId,
         email
     };
 
     const accessToken = signAccessToken(payload);
     const refreshToken = signRefreshToken(payload);
 
-    await enforceSessionCap(user.id.toString());
+    await enforceSessionCap(userId.toString());
 
     await prisma.session.create({
         data: {
-            userId: user.id,
+            userId: userId,
             refreshTokenHash: hashToken(refreshToken),
             ip: req.ip ?? "unknown",
             userAgent: req.headers["user-agent"] ?? "unknown",
@@ -118,6 +130,11 @@ export async function login(req: Request, res: Response) {
     return res.status(200).json({
         success: true,
         message: "User logged in successfully.",
-        accessToken
+        accessToken,
+        user: {
+            id: userId,
+            name: userName,
+            email
+        }
     });
 }
