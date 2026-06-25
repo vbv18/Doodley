@@ -11,6 +11,9 @@
   "dependencies": {
     "@repo/config": "workspace:*",
     "@repo/db": "workspace:*",
+    "@repo/types": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "jsonwebtoken": "^9.0.3",
     "ws": "^8.21.0"
   },
   "keywords": [],
@@ -19,6 +22,7 @@
   "type": "module",
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/ws": "^8.18.1"
   }
 }
