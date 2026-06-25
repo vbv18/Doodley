@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+    /* App Background */
+    --color-primary-bg: #f9fafb;
+
+    /* --color-secondary-bg: ; */
+    /* --color-secondary-txt: ; */
+
+    /* Primary Button Action */
+    --color-primary-btn-bg: #6965db;
+    --color-primary-btn-txt: #ffffff;
+    /* --color-primary-btn-hover-bg */
+
+    /* Secondary Button Action */
+    --color-secondary-btn-bg: #e0dfff;
+    --color-secondary-btn-txt: #151270;
+    /* --color-secondary-btn-hover-bg */
+
+    /* Tertiary / Ghost */
+    --color-tertiary-btn-bg: #ececf4;
+    --color-tertiary-btn-txt: #1b1b1f;
+    /* --color-tertiary-btn-hover-bg */
+}
+
+@source "./src/"
