@@ -8,8 +8,6 @@ const ENVSchema = z.object({
 
     HTTP_PORT: z.coerce.number().int().positive(),
 
-    DATABASE_URL: z.string(),
-
     SALT_ROUNDS: z.coerce.number().int().positive().default(12),
     ACCESS_TOKEN_SECRET: z.string(),
     ACCESS_TOKEN_TTL: z.string().regex(/^\d+[mhd]$/),
