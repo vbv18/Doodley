@@ -3,7 +3,6 @@ import { Router } from "express";
 import asyncHandler from "../../utils/asyncHandler.js";
 import * as sessionController from "./sessions.controller.js";
 
-
 const sessionRouter: Router = Router();
 
 // POST /api/v1/sessions/refresh
@@ -20,6 +19,5 @@ sessionRouter.delete("/:id", asyncHandler(sessionController.deleteById));
 
 // DELETE /api/v1/sessions/
 sessionRouter.delete("/", asyncHandler(sessionController.deleteAll));
-
 
 export default sessionRouter;

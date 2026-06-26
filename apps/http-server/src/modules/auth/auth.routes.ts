@@ -3,7 +3,6 @@ import { Router } from "express";
 import asyncHandler from "../../utils/asyncHandler.js";
 import * as authController from "./auth.controller.js";
 
-
 const authRouter: Router = Router();
 
 // POST /api/v1/auth/register
@@ -20,6 +19,5 @@ authRouter.post("/login", asyncHandler(authController.login));
 
 // // POST /api/v1/auth/reset-password
 // authRouter.post("/reset-password");
-
 
 export default authRouter;

@@ -1,9 +1,7 @@
-import type { Request, Response, NextFunction } from "express"
-
+import type { Request, Response, NextFunction } from "express";
 
 export type AsyncRouteHandler = (
-    req: Request,
-    res: Response,
-    next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction,
 ) => Promise<unknown>;
-

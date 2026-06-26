@@ -1,8 +1,7 @@
-import type { RoomRole } from "@repo/types"
-
+import type { RoomRole } from "@repo/types";
 
 export type MembershipContext = {
-    userId: number,
-    roomId: number,
-    role: RoomRole
+  userId: number;
+  roomId: number;
+  role: RoomRole;
 };

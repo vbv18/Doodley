@@ -1,16 +1,13 @@
-
-
-
 export default class AppError extends Error {
-    public readonly statusCode: number;
-    public readonly details?: unknown;
+  public readonly statusCode: number;
+  public readonly details?: unknown;
 
-    constructor(statusCode: number, message: string, details?: unknown) {
-        super(message);
+  constructor(statusCode: number, message: string, details?: unknown) {
+    super(message);
 
-        this.statusCode = statusCode;
-        this.details = details;
+    this.statusCode = statusCode;
+    this.details = details;
 
-        Error.captureStackTrace(this, this.constructor);
-    }
+    Error.captureStackTrace(this, this.constructor);
+  }
 }
