@@ -1,4 +1,4 @@
-import { RoomRole } from "@repo/types"
+import type { RoomRole } from "@repo/types"
 
 
 export type MembershipContext = {

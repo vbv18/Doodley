@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import AppError from "../../utils/AppError.js";
 import { AcceptInviteSchema, ChangeRoleSchema, CreateRoomSchema } from "./room.validation.js";
 import * as roomService from "./room.service.js";
-import { RoomRole } from "@repo/types";
+import type { RoomRole } from "@repo/types";
 
 
 export async function getRooms(req: Request, res: Response) {

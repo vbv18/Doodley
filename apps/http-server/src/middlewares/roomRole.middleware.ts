@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 
 import AppError from "../utils/AppError.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import { RoomRole } from "@repo/types";
+import type { RoomRole } from "@repo/types";
 import { prisma } from "@repo/db";
 import { RoomPermission, RoomPermissions } from "../modules/rooms/permissions.js";
 

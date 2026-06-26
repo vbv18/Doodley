@@ -3,7 +3,7 @@ import { prisma } from "@repo/db";
 import { generateInviteToken, generateUniqueRoomCode, ROOM_ROLE_RANK } from "./room.utils.js";
 import { MembershipContext } from "./room.types.js";
 import { INVITATION_TTL_MS } from "@repo/config";
-import { RoomRole } from "@repo/types";
+import type { RoomRole } from "@repo/types";
 
 
 export async function getRooms(userId: number) {
