@@ -7,14 +7,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./http-env": {
-      "types": "./dist/http-env.d.ts",
-      "default": "./dist/http-env.js"
-    },
-    "./ws-env": {
-      "types": "./dist/ws-env.d.ts",
-      "default": "./dist/ws-env.js"
     }
   },
   "scripts": {
@@ -23,10 +15,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "dotenv": "^17.4.2",
-    "zod": "^4.4.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^25.9.3"
