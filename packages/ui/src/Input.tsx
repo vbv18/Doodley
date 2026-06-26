@@ -1,33 +1,28 @@
 import React, { forwardRef } from "react";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-    label?: string;
+  label?: string;
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({
-        label,
-        type = "text",
-        value,
-        disabled = false,
-        className = "",
-        ...props
-    }, ref) => {
+  (
+    { label, type = "text", value, disabled = false, className = "", ...props },
+    ref,
+  ) => {
+    return (
+      <div className="flex flex-col gap-2">
+        {label && (
+          <label className="text-sm font-medium text-primary-txt">
+            {label}
+          </label>
+        )}
 
-        return (
-            <div className="flex flex-col gap-2">
-                {label && (
-                    <label className="text-sm font-medium text-primary-txt">
-                        {label}
-                    </label>
-                )}
-
-                <input
-                    ref={ref}
-                    type={type}
-                    value={value}
-                    disabled={disabled}
-                    className={`
+        <input
+          ref={ref}
+          type={type}
+          value={value}
+          disabled={disabled}
+          className={`
                         w-full rounded-lg border
                         px-4 py-3
                         outline-none transition-all duration-300
@@ -38,11 +33,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                         disabled:backdrop-opacity-50
                         ${className}
                     `}
-                    {...props}
-                />
-            </div>
-        );
-    }
+          {...props}
+        />
+      </div>
+    );
+  },
 );
 
 Input.displayName = "Input";
