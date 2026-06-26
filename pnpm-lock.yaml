@@ -41,6 +41,9 @@ importers:
       cors:
         specifier: ^2.8.6
         version: 2.8.6
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
       express:
         specifier: ^5.2.1
         version: 5.2.1
@@ -175,31 +178,24 @@ importers:
       '@repo/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      jsonwebtoken:
-        specifier: ^9.0.3
-        version: 9.0.3
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
       ws:
         specifier: ^8.21.0
         version: 8.21.0
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      '@types/jsonwebtoken':
-        specifier: ^9.0.10
-        version: 9.0.10
       '@types/ws':
         specifier: ^8.18.1
         version: 8.18.1
 
   packages/config:
-    dependencies:
-      dotenv:
-        specifier: ^17.4.2
-        version: 17.4.2
-      zod:
-        specifier: ^4.4.3
-        version: 4.4.3
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -270,7 +266,7 @@ importers:
         version: 8.61.1(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.2)
 
   packages/types:
-    dependencies:
+    devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -313,9 +309,6 @@ importers:
 
   packages/utils:
     dependencies:
-      '@repo/config':
-        specifier: workspace:*
-        version: link:../config
       '@repo/types':
         specifier: workspace:*
         version: link:../types

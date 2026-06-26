@@ -13,8 +13,9 @@
     "@repo/db": "workspace:*",
     "@repo/types": "workspace:*",
     "@repo/utils": "workspace:*",
-    "jsonwebtoken": "^9.0.3",
-    "ws": "^8.21.0"
+    "dotenv": "^17.4.2",
+    "ws": "^8.21.0",
+    "zod": "^4.4.3"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +23,6 @@
   "type": "module",
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/jsonwebtoken": "^9.0.10",
     "@types/ws": "^8.18.1"
   }
 }
