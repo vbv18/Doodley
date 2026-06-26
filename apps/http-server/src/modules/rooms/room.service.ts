@@ -192,7 +192,7 @@ export async function acceptInvite(userId: number, token: string) {
         throw new AppError(409, "Already a member");
     }
 
-    return prisma.$transaction(async (tx) => {
+    const membership = await prisma.$transaction(async (tx) => {
 
         await tx.invitation.update({
             where: {
@@ -204,14 +204,18 @@ export async function acceptInvite(userId: number, token: string) {
             }
         });
 
-        return tx.roomMember.create({
+        const membership = await tx.roomMember.create({
             data: {
                 userId,
                 roomId: invitation.roomId,
                 role: "VIEWER"
             }
         });
+
+        return membership;
     });
+
+    return membership;
 }
 
 export async function changeRoomRole(roomId: number, targetUserId: number, requesterMembership: MembershipContext, newRole: RoomRole) {
