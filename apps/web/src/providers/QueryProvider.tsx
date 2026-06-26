@@ -4,14 +4,11 @@ import { ReactNode } from "react";
 const queryClient = new QueryClient();
 
 type Props = {
-    children: ReactNode;
+  children: ReactNode;
 };
 
 export function QueryProvider({ children }: Props) {
-
-    return (
-        <QueryClientProvider client={queryClient}>
-            {children}
-        </QueryClientProvider>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
 }
