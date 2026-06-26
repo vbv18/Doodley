@@ -14,7 +14,6 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "@repo/config": "workspace:*",
     "@repo/types": "workspace:*",
     "@types/node": "^26.0.0",
     "jsonwebtoken": "^9.0.3"
