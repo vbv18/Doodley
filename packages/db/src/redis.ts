@@ -1,16 +1,15 @@
 import { createClient } from "redis";
 
-
 export const redis = createClient({
-    url: process.env.REDIS_URL,
+  url: process.env.REDIS_URL,
 });
 
 redis.on("error", (err) => {
-    console.error("Redis Error:", err);
+  console.error("Redis Error:", err);
 });
 
 export async function connectRedis() {
-    if (!redis.isOpen) {
-        await redis.connect();
-    }
+  if (!redis.isOpen) {
+    await redis.connect();
+  }
 }

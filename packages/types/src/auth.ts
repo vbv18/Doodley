@@ -1,9 +1,7 @@
-
-
 export type JWTPayload = {
-    id: number,
-    email: string
-}
+  id: number;
+  email: string;
+};
 
 export type GlobalRole = "SUPER_ADMIN" | "ADMIN" | "USER" | "GUEST";
 
