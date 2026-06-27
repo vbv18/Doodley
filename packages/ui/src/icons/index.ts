@@ -5,3 +5,5 @@ export * from "./DeleteIcon";
 export * from "./PlusIcon";
 export * from "./SettingsIcon";
 export * from "./ShareIcon";
+export * from "./LeftArrow";
+export * from "./Send";
