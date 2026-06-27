@@ -21,10 +21,17 @@ export default function SignIn() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    loginMutation.mutate({
-      email,
-      password,
-    });
+    loginMutation.mutate(
+      {
+        email,
+        password,
+      },
+      {
+        onSuccess: () => {
+          navigate("/dashboard");
+        },
+      },
+    );
   }
 
   return (
