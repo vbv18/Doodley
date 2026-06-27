@@ -16,7 +16,6 @@
     "prisma:generate": "prisma generate --config prisma.config.ts"
   },
   "dependencies": {
-    "@repo/typescript-config": "workspace:*",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "dotenv": "^17.4.2",
@@ -26,6 +25,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^25.9.3",
     "prisma": "^7.8.0"
   }
