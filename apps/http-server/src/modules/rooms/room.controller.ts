@@ -209,3 +209,88 @@ export async function removeMember(req: Request, res: Response) {
     message: "Member removed successfully",
   });
 }
+
+export async function deleteRoom(req: Request, res: Response) {
+  if (!req.user) {
+    throw new AppError(401, "Unauthorized");
+  }
+
+  const roomId = Number(req.params.roomId);
+
+  if (!Number.isInteger(roomId)) {
+    throw new AppError(400, "Invalid room id");
+  }
+
+  await roomService.deleteRoom(roomId, req.user.id);
+
+  return res.status(200).json({
+    success: true,
+    message: "Room deleted successfully",
+  });
+}
+
+export async function leaveRoom(req: Request, res: Response) {
+  if (!req.user) {
+    throw new AppError(401, "Unauthorized");
+  }
+
+  if (!req.membership) {
+    throw new AppError(401, "Membership not found");
+  }
+
+  const userId = req.user.id;
+  const roomId = Number(req.params.roomId);
+
+  if (!Number.isInteger(roomId)) {
+    throw new AppError(400, "Invalid room id");
+  }
+
+  await roomService.leaveRoom(userId, roomId, req.membership);
+
+  return res.status(200).json({
+    success: true,
+    message: "Left Room",
+  });
+}
+
+export async function getChatHistory(req: Request, res: Response) {
+  if (!req.user) {
+    throw new AppError(401, "Unauthorized");
+  }
+
+  const userId = req.user.id;
+  const roomId = Number(req.params.roomId);
+
+  if (!Number.isInteger(roomId)) {
+    throw new AppError(400, "Invalid room id");
+  }
+
+  const cursor = req.query.cursor ? Number(req.query.cursor) : undefined;
+  const limit = req.query.limit ? Math.min(Number(req.query.limit), 100) : 50;
+
+  const result = await roomService.getChatHistory(roomId, cursor, limit);
+
+  return res.status(200).json({
+    success: true,
+    ...result
+  });
+}
+
+export async function getWhiteboardHistory(req: Request, res: Response) {
+  if (!req.user) {
+    throw new AppError(401, "Unauthorized");
+  }
+
+  const roomId = Number(req.params.roomId);
+
+  if (!Number.isInteger(roomId)) {
+    throw new AppError(400, "Invalid room id");
+  }
+
+  const versions = await roomService.getWhiteboardHistory(roomId);
+
+  return res.status(200).json({
+    success: true,
+    versions
+  });
+}

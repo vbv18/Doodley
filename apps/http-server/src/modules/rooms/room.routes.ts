@@ -32,6 +32,21 @@ roomRouter.get(
   asyncHandler(roomController.getRoomById),
 );
 
+// DELETE /api/v1/rooms/:roomId
+roomRouter.delete(
+  "/:roomId",
+  authenticate,
+  requirePermission("DELETE_ROOM"),
+  asyncHandler(roomController.deleteRoom),
+);
+
+// DELETE /api/v1/rooms/:roomId/leave
+roomRouter.delete(
+  "/:roomId/leave",
+  authenticate,
+  asyncHandler(roomController.leaveRoom),
+);
+
 // GET /api/v1/rooms/:roomId/members
 roomRouter.get(
   "/:roomId/members",
@@ -69,6 +84,22 @@ roomRouter.delete(
   authenticate,
   requirePermission("REMOVE_MEMBERS"),
   asyncHandler(roomController.removeMember),
+);
+
+// GET /api/v1/rooms/:roomId/chats
+roomRouter.get(
+  "/:roomId/chats",
+  authenticate,
+  requirePermission("VIEW_WHITEBOARD"),
+  asyncHandler(roomController.getChatHistory),
+);
+
+// GET /api/v1/rooms/:roomId/whiteboard/history
+roomRouter.get(
+  "/:roomId/whiteboard/history",
+  authenticate,
+  requirePermission("VIEW_WHITEBOARD"),
+  asyncHandler(roomController.getWhiteboardHistory),
 );
 
 export default roomRouter;

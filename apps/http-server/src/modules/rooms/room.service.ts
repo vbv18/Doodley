@@ -300,3 +300,111 @@ export async function removeMember(
 
   return;
 }
+
+export async function deleteRoom(roomId: number, requesterId: number) {
+  const room = await prisma.room.findUnique({
+    where: {
+      id: roomId,
+    },
+    select: {
+      ownerId: true,
+    },
+  });
+
+  if (!room) {
+    throw new AppError(404, "Room not found");
+  }
+
+  if (room.ownerId !== requesterId) {
+    throw new AppError(403, "Only the owner can delete this room");
+  }
+
+  await prisma.room.delete({
+    where: {
+      id: roomId,
+    },
+  });
+}
+
+export async function leaveRoom(
+  userId: number,
+  roomId: number,
+  membership: MembershipContext,
+) {
+  if (membership.role === "OWNER") {
+    throw new AppError(400, "Owner cannot leave the room");
+  }
+
+  await prisma.roomMember.delete({
+    where: {
+      userId_roomId: {
+        userId,
+        roomId,
+      },
+    },
+  });
+}
+
+export async function getChatHistory(
+  roomId: number,
+  cursor?: number,
+  limit: number = 50,
+) {
+  const chats = await prisma.chat.findMany({
+    where: {
+      roomId,
+    },
+    ...(cursor
+      ? {
+          cursor: {
+            id: cursor,
+          },
+          skip: 1,
+        }
+      : {}),
+    take: limit,
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      message: true,
+      createdAt: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar_url: true,
+        },
+      },
+    },
+  });
+
+  const nextCursor =
+    chats.length === limit ? chats[chats.length - 1]?.id : undefined;
+
+  return { chats: chats.reverse(), nextCursor };
+}
+
+export async function getWhiteboardHistory(roomId: number, limit = 10) {
+  const versions = await prisma.whiteboardVersion.findMany({
+    where: {
+      roomId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: limit,
+    select: {
+      id: true,
+      snapshot: true,
+      createdAt: true,
+      createdBy: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
+
+  return versions;
+}
