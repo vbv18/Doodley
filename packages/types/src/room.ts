@@ -1,7 +1,9 @@
-import type { RoomRole } from "./auth.js";
+import type { GlobalRole, RoomRole } from "./auth.js";
 
-export type RoomMemberInfo = {
-  userId: number;
+export type User = {
+  id: number;
   name: string;
-  roomRole: RoomRole;
+  email: string;
+  globalRole: GlobalRole;
+  avatar_url: string | null;
 };
