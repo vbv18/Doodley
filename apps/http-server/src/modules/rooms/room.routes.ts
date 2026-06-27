@@ -24,6 +24,13 @@ roomRouter.post(
   asyncHandler(roomController.createRoom),
 );
 
+// POST /api/v1/rooms/invitations/accept
+roomRouter.post(
+  "/invitations/accept",
+  authenticate,
+  asyncHandler(roomController.acceptInvite),
+);
+
 // GET /api/v1/rooms/:roomId
 roomRouter.get(
   "/:roomId",
@@ -61,13 +68,6 @@ roomRouter.post(
   authenticate,
   requirePermission("INVITE_MEMBERS"),
   asyncHandler(roomController.createInvitation),
-);
-
-// POST /api/v1/rooms/invitations/accept
-roomRouter.post(
-  "/invitations/accept",
-  authenticate,
-  asyncHandler(roomController.acceptInvite),
 );
 
 // PATCH /api/v1/rooms/:roomId/members/:userId
