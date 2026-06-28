@@ -1,31 +1,35 @@
 import { create } from "zustand";
+import type { GlobalRole } from "@repo/types";
 
-type User = {
+type AuthUser = {
   id: number;
   name: string;
   email: string;
+  globalRole?: GlobalRole;
+  avatar_url?: string | null;
 };
 
 type AuthStore = {
-  user: User | null;
+  user: AuthUser | null;
   accessToken: string | null;
+  isInitialized: boolean;
 
-  setUser: (user: User) => void;
+  setUser: (user: AuthUser) => void;
   setAccessToken: (token: string) => void;
+  setInitialized: () => void;
   logout: () => void;
 };
 
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   accessToken: null,
+  isInitialized: false,
 
   setUser: (user) => set({ user }),
 
   setAccessToken: (token) => set({ accessToken: token }),
 
-  logout: () =>
-    set({
-      user: null,
-      accessToken: null,
-    }),
+  setInitialized: () => set({ isInitialized: true }),
+
+  logout: () => set({ user: null, accessToken: null }),
 }));

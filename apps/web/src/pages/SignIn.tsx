@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 import { Button, Input } from "@repo/ui";
-import { useLoginUser } from "../hooks/useLoginUser.js";
+import { useLoginUser } from "../hooks/login-user.js";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -12,8 +11,6 @@ export default function SignIn() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const navigate = useNavigate();
-
   const isFormValid = email.trim() !== "" && password.trim() !== "";
 
   const loginMutation = useLoginUser();
@@ -21,40 +18,26 @@ export default function SignIn() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    loginMutation.mutate(
-      {
-        email,
-        password,
-      },
-      {
-        onSuccess: () => {
-          navigate("/dashboard");
-        },
-      },
-    );
+    loginMutation.mutate({
+      email,
+      password,
+    });
   }
 
   return (
-    <div
-      className="
-                h-screen w-screen flex items-center justify-center 
-                p-4
-                bg-primary-bg 
-            "
-    >
-      <div
-        className="
-                    w-full max-w-md 
-                    rounded-2xl border
-                    bg-white
-                    px-6 py-10
-                    shadow-xl
-                "
-      >
-        <div className="mb-6 text-center">
-          <h1 className="text-3xl font-bold">Log In</h1>
-          <p className="mt-2 text-gray-500">
-            <i>Do not miss out</i>
+    <div className="h-screen w-screen flex items-center justify-center p-4 bg-primary-bg">
+      <div className="w-full max-w-md rounded-2xl border bg-white px-6 py-10 shadow-xl">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold">Welcome Back</h1>
+
+          <div className="mt-2 flex items-center justify-center gap-2">
+            <img src="/favicon.svg" alt="doodle.ai" className="h-6 w-6" />
+
+            <span className="text-xl font-bold italic">doodle.ai</span>
+          </div>
+
+          <p className="mt-3 text-gray-500">
+            Sign in to continue collaborating.
           </p>
         </div>
 
@@ -80,7 +63,7 @@ export default function SignIn() {
             ref={(el) => {
               inputRefs.current[1] = el;
             }}
-            placeholder="******"
+            placeholder="Enter your password"
             type="password"
             value={password}
             autoComplete="current-password"
@@ -104,20 +87,11 @@ export default function SignIn() {
           </Button>
         </form>
 
-        <div
-          className="
-                        mt-4 
-                        text-center text-sm text-gray-500
-                    "
-        >
+        <div className="mt-4 text-center text-sm text-gray-500 ">
           Don't have an account?{" "}
           <Link
             to="/"
-            className="
-                            font-medium
-                            text-primary-btn-bg
-                            hover:underline
-                        "
+            className="font-medium text-primary-btn-bg hover:underline"
           >
             Sign Up
           </Link>

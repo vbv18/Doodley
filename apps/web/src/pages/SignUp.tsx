@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 import { Button, Input } from "@repo/ui";
-import { useRegisterUser } from "../hooks/useRegisterUser.js";
+import { useRegisterUser } from "../hooks/register-user.js";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -13,8 +12,6 @@ export default function SignUp() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const navigate = useNavigate();
-
   const isFormValid =
     name.trim() !== "" && email.trim() !== "" && password.trim() !== "";
 
@@ -23,45 +20,28 @@ export default function SignUp() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    registerMutation.mutate(
-      {
-        name,
-        email,
-        password,
-      },
-      {
-        onSuccess: () => {
-          navigate("/dashboard");
-        },
-      },
-    );
+    registerMutation.mutate({
+      name,
+      email,
+      password,
+    });
   }
 
   return (
-    <div
-      className="
-                h-screen w-screen flex items-center justify-center 
-                p-4
-                bg-primary-bg 
-            "
-    >
-      <div
-        className="
-                    w-full max-w-md 
-                    rounded-2xl border
-                    bg-white
-                    p-8
-                    shadow-xl
-                "
-      >
+    <div className="h-screen w-screen flex items-center justify-center p-4 bg-primary-bg">
+      <div className="w-full max-w-md rounded-2xl border bg-white p-8 shadow-xl">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold">Create Account</h1>
-          <p className="mt-2 text-gray-500">
-            Join{" "}
-            <i>
-              <b>doodle.ai</b>
-            </i>
-          </p>
+
+          <div className="mt-2 flex items-center justify-center gap-3 text-gray-500">
+            <span>Join</span>
+
+            <div className="flex items-center justify-center gap-2">
+              <img src="/favicon.svg" alt="doodle.ai" className="h-4 w-4" />
+
+              <span className="font-bold italic">doodle.ai</span>
+            </div>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -102,7 +82,7 @@ export default function SignUp() {
             ref={(el) => {
               inputRefs.current[2] = el;
             }}
-            placeholder="******"
+            placeholder="Enter your password"
             type="password"
             value={password}
             autoComplete="new-password"
@@ -126,12 +106,7 @@ export default function SignUp() {
           </Button>
         </form>
 
-        <div
-          className="
-                        mt-4 
-                        text-center text-sm text-gray-500
-                    "
-        >
+        <div className="mt-4 text-center text-sm text-gray-500 ">
           Already have an account?{" "}
           <Link
             to="/login"
