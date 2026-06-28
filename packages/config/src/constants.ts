@@ -9,3 +9,7 @@ export const MAX_CHAT_MESSAGE_LENGTH: number = 2000;
 export const ROOM_CODE_LENGTH: number = 8;
 
 export const DEFAULT_AVATAR: string = "";
+
+export const WB_TTL_SECONDS: number = 7 * 24 * 60 * 60;
+
+export const SNAPSHOT_DEBOUNCE_MS = 5_000;
