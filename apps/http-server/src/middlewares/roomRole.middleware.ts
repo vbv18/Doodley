@@ -5,7 +5,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import type { RoomRole } from "@repo/types";
 import { prisma } from "@repo/db";
 import {
-  RoomPermission,
+  type RoomPermission,
   RoomPermissions,
 } from "../modules/rooms/permissions.js";
 
