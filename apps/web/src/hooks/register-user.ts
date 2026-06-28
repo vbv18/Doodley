@@ -1,9 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-
+import { useNavigate } from "react-router-dom";
 import { register } from "../api/auth.js";
 import { useAuthStore } from "../store/auth.store.js";
 
 export function useRegisterUser() {
+  const navigate = useNavigate();
+
   return useMutation({
     mutationFn: ({
       name,
@@ -20,6 +22,8 @@ export function useRegisterUser() {
 
       setAccessToken(data.accessToken);
       setUser(data.user);
+
+      navigate("/dashboard");
     },
 
     onError: (error) => {
