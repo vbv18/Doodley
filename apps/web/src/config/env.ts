@@ -6,6 +6,10 @@ const ENVSchema = z.object({
     .default("development"),
 
   VITE_BACKEND_URL: z.string().url().min(1),
+  VITE_WS_URL: z
+    .string()
+    .min(1)
+    .refine((val) => val.startsWith("ws://") || val.startsWith("wss://")),
 });
 
 const parsed = ENVSchema.safeParse(import.meta.env);
